@@ -1,4 +1,4 @@
-# BLENDED_LERNING
+
 # Implementation-of-Multiple-Linear-Regression-Model-with-Cross-Validation-for-Predicting-Car-Prices
 
 ## AIM:
@@ -40,12 +40,13 @@ To write a program to predict the price of cars using a multiple linear regressi
     Predict outcomes and compare them to the actual values. 
 
 ## Program:
-```
+```py
 /*
 Program to implement the multiple linear regression model for predicting car prices with cross-validation.
-Developed by: Arjun N S
+Developed by: ARJUN N S
 RegisterNumber: 212223230020
 */
+
 # Importing necessary libraries
 import pandas as pd
 import numpy as np
@@ -53,6 +54,7 @@ import statsmodels.api as sm
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
 
 # Load the dataset
 data = pd.read_csv("https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-ML240EN-SkillsNetwork/labs/data/CarPrice_Assignment.csv")
@@ -65,6 +67,11 @@ data = pd.get_dummies(data, drop_first=True)
 # Splitting the data into features and target variable
 X = data.drop('price', axis=1)
 y = data['price']
+
+# Standardizing the features
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+y = scaler.fit_transform(np.array(y).reshape(-1, 1))
 
 # Splitting the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -100,8 +107,9 @@ plt.show()
 ```
 
 ## Output:
-<img width="801" alt="Screenshot 2024-10-06 at 8 53 33 PM" src="https://github.com/user-attachments/assets/1a84f7be-ffb0-4073-b864-39555861f443">
+![alt text](image.png)
 
+![alt text](image-1.png)
 
 ## Result:
 Thus, the program to implement the multiple linear regression model with cross-validation for predicting car prices is written and verified using Python programming.
